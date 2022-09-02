@@ -6,11 +6,9 @@ import { JwtModule } from '@nestjs/jwt';
 import { EnvService } from '../config/env.service';
 import { EnvModule } from '../config/env.module';
 import { JwtStrategy } from './jwt.strategy';
-import { UsersModule } from '../users/users.module';
 
 @Module({
   imports: [
-    UsersModule,
     PassportModule,
     JwtModule.registerAsync({
       imports: [EnvModule],

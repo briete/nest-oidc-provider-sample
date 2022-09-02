@@ -3,8 +3,6 @@ import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { User } from '@prisma/client';
 
-import { UsersService } from '../users/users.service';
-
 export type ValidatedUser = Omit<User, 'hashedPassword'>;
 export type AccessToken = {
   access_token: string;
@@ -17,10 +15,7 @@ export type JWTPayload = {
 
 @Injectable()
 export class AuthService {
-  constructor(
-    private usersService: UsersService,
-    private jwtService: JwtService,
-  ) {}
+  constructor(private jwtService: JwtService) {}
 
   /**
    * ユーザーを検証する
@@ -31,15 +26,15 @@ export class AuthService {
     email: string,
     password: string,
   ): Promise<ValidatedUser | null> {
-    const user = await this.usersService.user({
-      email,
-    });
-    const isMatch =
-      user && (await bcrypt.compare(password, user.hashedPassword));
-    if (isMatch) {
-      const { hashedPassword, ...result } = user;
-      return result;
-    }
+    // const user = await this.usersService.user({
+    //   email,
+    // });
+    // const isMatch =
+    //   user && (await bcrypt.compare(password, user.hashedPassword));
+    // if (isMatch) {
+    //   const { hashedPassword, ...result } = user;
+    //   return result;
+    // }
     return null;
   }
 

@@ -32,4 +32,8 @@ export class EnvService {
   get JwtSecret(): string {
     return this.configService.get('JWT_SECRET');
   }
+
+  get Port(): number {
+    return this.configService.get('PORT');
+  }
 }

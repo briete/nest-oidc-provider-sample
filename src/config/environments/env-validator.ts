@@ -24,6 +24,10 @@ export class EnvValidator {
   @IsNotEmpty()
   @IsString()
   JWT_SECRET: string;
+
+  @IsNotEmpty()
+  @IsNumber()
+  PORT: number;
 }
 
 /**
